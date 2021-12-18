@@ -43,7 +43,7 @@ namespace DeviceManager.Controllers
             {
                 IEnumerable<DeviceDTO> deviceListOfDTOs = await mediator.Send(new GetDevicesListQuery());
 
-                IEnumerable<DeviceVM> deviceListOfViewModels = mapper.Map<IEnumerable<DeviceVM>>(deviceListOfDTOs);
+                IEnumerable<DeviceVM> deviceListOfViewModels = mapper.MapDeviceDTO_To_DeviceVM(deviceListOfDTOs);
 
                 return Ok(deviceListOfViewModels);
             }
@@ -69,7 +69,7 @@ namespace DeviceManager.Controllers
             {
                 DeviceDTO deviceWithGivenId = await mediator.Send(new GetDeviceByIdQuery(id));
 
-                DeviceVM deviceWithGivenId_AsViewModel = mapper.Map<DeviceVM>(deviceWithGivenId);
+                DeviceVM deviceWithGivenId_AsViewModel = mapper.MapDeviceDTO_To_DeviceVM(deviceWithGivenId);
                 return Ok(deviceWithGivenId_AsViewModel);
             }
             catch (DeviceNotFoundException ex)

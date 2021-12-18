@@ -40,7 +40,7 @@ namespace DeviceManager.Busniess.Handlers.Commands_Handlers.Device_Commands_Hand
             }
             catch (Exception E)
             {
-                return null;
+                throw;
             }
         }
     }

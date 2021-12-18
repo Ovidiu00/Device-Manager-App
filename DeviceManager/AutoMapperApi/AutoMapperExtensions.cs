@@ -29,10 +29,13 @@ namespace DeviceManager.API.AutoMapperApi
             {
                 throw;
             }
-            
-
-
-
+        }
+        public static IEnumerable<DeviceVM> MapDeviceDTO_To_DeviceVM(this IMapper mapper, IEnumerable<DeviceDTO> source)
+        {
+            foreach (DeviceDTO deviceDTO in source)
+            {
+                yield return MapDeviceDTO_To_DeviceVM(mapper, deviceDTO);
+            }
         }
     }
 }
