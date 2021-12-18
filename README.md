@@ -9,7 +9,7 @@ So far I've implemented :
 
 * 3 Layer Arhitecutre.
 * Meditar + CQRS.
-* Abstracting AutoMapper through services for unit testing.
+* Abstracting AutoMapper through services for additional logic.
 * EF Core.
 * JWT Authentication and Authorization .
 * UnitOfWork + Repository pattern.
