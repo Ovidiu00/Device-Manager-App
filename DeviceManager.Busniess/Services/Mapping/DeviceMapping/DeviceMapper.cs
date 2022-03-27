@@ -19,8 +19,7 @@ namespace DeviceManager.Busniess.Services.Mapping.DeviceMapper
         }
         public async Task<Device>MapAddDeviceDTOtoDeviceEntity(AddDeviceDTO deviceToBeAdded)
         {
-            var deviceEntity = await this.MapAddDeviceDTOtoDeviceEntity(deviceToBeAdded);
-
+            var deviceEntity = mapper.Map<Device>(deviceToBeAdded);
             var operatingSystemWithGivenName = await unitOfWork.OperatingSystemsRepository.FindSingle(x =>
                                                                                     x.Name == deviceToBeAdded.OperatingSystem
                                                                                  && x.Version == deviceToBeAdded.Version);

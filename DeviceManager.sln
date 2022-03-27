@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceManager.Busniess", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceManager.DataAcess", "DeviceManager.DataAcess\DeviceManager.DataAcess.csproj", "{F4FCBFE8-8E89-4204-B561-294615979BAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{50BD23AD-E995-4A08-9D4C-0CFF40EC3479}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{F4FCBFE8-8E89-4204-B561-294615979BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4FCBFE8-8E89-4204-B561-294615979BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4FCBFE8-8E89-4204-B561-294615979BAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50BD23AD-E995-4A08-9D4C-0CFF40EC3479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50BD23AD-E995-4A08-9D4C-0CFF40EC3479}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50BD23AD-E995-4A08-9D4C-0CFF40EC3479}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50BD23AD-E995-4A08-9D4C-0CFF40EC3479}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

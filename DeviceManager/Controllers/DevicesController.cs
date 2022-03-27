@@ -7,9 +7,11 @@ using DeviceManager.Busniess.Exceptions.BaseException;
 using DeviceManager.Busniess.Exceptions.DevicesExceptions;
 using DeviceManager.Busniess.Queries;
 using DeviceManager.Busniess.Queries.DevicesQueries;
+using DeviceManager.Busniess.Query_Filter_Model.Custom;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -36,13 +38,12 @@ namespace DeviceManager.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DeviceVM>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Devices()
+        public async Task<ActionResult> Devices([FromQuery]DevicesFilterModel query)
         {
 
             try
             {
-                IEnumerable<DeviceDTO> deviceListOfDTOs = await mediator.Send(new GetDevicesListQuery());
-
+                IEnumerable<DeviceDTO> deviceListOfDTOs = await mediator.Send(new GetDevicesListQuery(query));
                 IEnumerable<DeviceVM> deviceListOfViewModels = mapper.MapDeviceDTO_To_DeviceVM(deviceListOfDTOs);
 
                 return Ok(deviceListOfViewModels);
@@ -89,7 +90,7 @@ namespace DeviceManager.Controllers
 
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeviceVM))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteDevice(int id)
@@ -149,7 +150,7 @@ namespace DeviceManager.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeviceVM))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(DeviceVM))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> EditDevice(int id, EditDeviceVM deviceToEddited)
         {
             try

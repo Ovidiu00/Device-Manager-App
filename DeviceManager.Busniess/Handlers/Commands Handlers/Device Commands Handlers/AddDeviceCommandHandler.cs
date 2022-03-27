@@ -35,7 +35,6 @@ namespace DeviceManager.Busniess.Handlers.Commands_Handlers.Device_Commands_Hand
                 unitOfWork.DeviceRepository.Add(deviceEntity);
                 await unitOfWork.Commit();
 
-                //TO DO  - EXTENSION METHOD!
                 return deviceMapper.MapDeviceEntityToDeviceDTO(deviceEntity);
             }
             catch (Exception E)

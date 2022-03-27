@@ -1,6 +1,7 @@
 ﻿using DeviceManager.Busniess.Dtos;
 using DeviceManager.Busniess.Queries.DevicesQueries;
 using DeviceManager.Busniess.Services.Mapping.DeviceMapper;
+using DeviceManager.DataAcess.Filters.Factories;
 using DeviceManager.DataAcess.Repositories;
 using MediatR;
 using System.Collections.Generic;
@@ -13,34 +14,27 @@ namespace DeviceManager.Busniess.Handlers.Queries_Handlers.Device_Queries_Handle
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IDeviceMapper deviceMapper;
-        public GetDevicesListHandler(IUnitOfWork unitOfWork, IDeviceMapper deviceMapper)
+        private readonly IDeviceTableFilterFactory deviceTableFilterFactory;
+
+        public GetDevicesListHandler(IUnitOfWork unitOfWork, IDeviceMapper deviceMapper, IDeviceTableFilterFactory deviceTableFilterFactory)
         {
             this.unitOfWork = unitOfWork;
             this.deviceMapper = deviceMapper;
+            this.deviceTableFilterFactory = deviceTableFilterFactory;
         }
         public async Task<IEnumerable<DeviceDTO>> Handle(GetDevicesListQuery request, CancellationToken cancellationToken)
         {
-            //TODO: CREATE FILTER ENDPOINT
-            //TableFiltersFactory<Device> devicesTableFilterFactory = new DevicesTableFilterFactory(unitOfWork);
+            var page = request.query.Page;
+            var itemsPerPage = request.query.ItemsPerPage;
+            var selector = request.query.Selector;
+            var value = request.query.Value;
 
-            //ITableFilter<Device> filter = devicesTableFilterFactory.CreateTableFilter();
+            var devicesTableFilter = deviceTableFilterFactory.CreateTableFilter(selector);
+            var filterExpression = devicesTableFilter.Filter(value);
+          
+            var devices = await unitOfWork.DeviceRepository.GetDevicesPaginated(page,itemsPerPage, filterExpression);
 
-
-            //var filterPairs = new Dictionary<string, string>() {
-            //    {"Processor","PROCESOR-NAME" },
-            //    {"OperatingSystemId","5" }
-            //};
-            //var results = await filter.Filter(filterPairs);
-            try
-            {
-                var totalDevices = await unitOfWork.DeviceRepository.GetDevicesListWithUsersAndOperatingSystemAsync();
-
-                return deviceMapper.MapDeviceEntityToDeviceDTO(totalDevices);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            return deviceMapper.MapDeviceEntityToDeviceDTO(devices);
         }
     }
 }

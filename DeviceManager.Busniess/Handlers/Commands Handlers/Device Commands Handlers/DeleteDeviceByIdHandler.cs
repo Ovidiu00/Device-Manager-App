@@ -30,7 +30,6 @@ namespace DeviceManager.Busniess.Handlers.Commands_Handlers.Device_Commands_Hand
                 await unitOfWork.Commit();
 
                 return true;
-
             }
             catch (Exception)
             {

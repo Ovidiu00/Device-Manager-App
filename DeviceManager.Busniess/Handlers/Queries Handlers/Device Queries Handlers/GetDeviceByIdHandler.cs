@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using DeviceManager.Busniess.Dtos;
+﻿using DeviceManager.Busniess.Dtos;
 using DeviceManager.Busniess.Exceptions.DevicesExceptions;
 using DeviceManager.Busniess.Queries.DevicesQueries;
 using DeviceManager.Busniess.Services.Mapping.DeviceMapper;
 using DeviceManager.DataAcess.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,9 +23,8 @@ namespace DeviceManager.Busniess.Handlers.Queries_Handlers.Device_Queries_Handle
         {
             try
             {
-                var result = await unitOfWork.DeviceRepository.GetDevicesListWithUsersAndOperatingSystemAsync();
+                var device = await unitOfWork.DeviceRepository.GetDevice(request.id);
 
-                var device = result.FirstOrDefault(x => x.Id == request.id);
                 if (device == null)
                     throw new DeviceNotFoundException();
 
