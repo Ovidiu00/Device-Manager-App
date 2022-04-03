@@ -3,7 +3,7 @@
 
 
 My project boilerplate using ASP.Net core for API and Angular for UI.
-In this solution I exercise various best practices, design patterns and arhitecutral styles trying to improve myself.
+In this solution I exercise various best practices, design patterns and arhitecutral styles
 
 So far I've implemented :
 
